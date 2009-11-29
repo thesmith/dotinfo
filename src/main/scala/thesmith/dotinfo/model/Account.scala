@@ -1,9 +1,27 @@
 package thesmith.dotinfo.model
 
-class Account (id: String, name: String, dom: String) {
-  var userId = id
-  var username = name
-  var domain = dom
-  
-  override def toString(): String = userId+", "+username+", "+domain
+import scala.reflect._
+import javax.persistence._
+
+@Entity
+@Table{ val name="account" }
+class Account {
+  @Id
+  @GeneratedValue{ val strategy=GenerationType.IDENTITY }
+  var id : Int = _
+
+  @Version
+  var version : Int = _
+
+  @Column{ val name="person_id" }
+  @BeanProperty var personId : String = _
+
+  @Column{ val name="user_id" }
+  @BeanProperty var userId : String = _
+
+  @Column{ val name="username" }
+  @BeanProperty var username : String = _
+
+  @Column{ val name="domain" }
+  @BeanProperty var domain : String = _
 }

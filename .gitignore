@@ -1,2 +1,5 @@
 .manager
 .settings
+target
+*.swp
+jpaweb.*

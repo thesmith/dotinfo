@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <inceptionYear>2008</inceptionYear>
   <properties>
-    <scala.version>2.7.0</scala.version>
+    <scala.version>2.7.4</scala.version>
   </properties>
 
   <repositories>
@@ -31,6 +31,11 @@
       <version>${scala.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.scala-libs</groupId>
+      <artifactId>scalajpa</artifactId>
+      <version>1.1</version>
+    </dependency>    
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.4</version>
@@ -46,6 +51,26 @@
     	<groupId>joda-time</groupId>
     	<artifactId>joda-time</artifactId>
     	<version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2.1</version>
+    </dependency> 
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>3.3.1.ga</version>
+    </dependency>
+    <dependency>
+      <groupId>hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>1.8.0.7</version>
+    </dependency>
+    <dependency>
+      <groupId>net.liftweb</groupId>
+      <artifactId>lift-jpa</artifactId>
+      <version>1.1-M6</version>
     </dependency>
   </dependencies>
 
