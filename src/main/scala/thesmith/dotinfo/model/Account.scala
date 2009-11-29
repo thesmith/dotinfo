@@ -3,6 +3,7 @@ package thesmith.dotinfo.model
 import scala.reflect._
 import javax.persistence._
 
+/** Entity class describes an Account, the kind used by SGNodeMapper */
 @Entity
 @Table{ val name="account" }
 class Account {
