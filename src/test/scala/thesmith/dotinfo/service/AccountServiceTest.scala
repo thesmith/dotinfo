@@ -15,6 +15,7 @@ class AccountServiceTest {
     account.domain = "domain"
     account.personId = "thesmith"
     account.username = "thesmith"
+    service.create(account)
   }
 
   @After
@@ -24,27 +25,36 @@ class AccountServiceTest {
 
   @Test
   def shouldPersistAccount() = {
-    service.create(account)
     assertNotNull(account.id)
   }
 
   @Test
   def shouldFindAccount() = {
-    service.create(account)
     val acc = service.find(account.personId, account.domain)
     assertNotNull(acc)
     assertEquals(account.username, acc.username)
   }
 
   @Test
-  def shouldFindAccounts() = {
-    service.create(account)
+  def shouldFindAccounts(): Unit = {
+    val a = new Account()
+    a.personId = account.personId
+    a.domain = "somedomain"
+    a.username = "fjkdls"
+
+    service.create(a)
+
+    assertNotNull(a.id)
+    val acc = service.find(account.personId, account.domain)
+    assertNotNull(acc)
+
     val accs = service.list(account.personId)
       
     assertNotNull(accs)
     assertFalse(accs.isEmpty)
-    assertTrue(accs.size > 0)
+    assertEquals(2, accs.size)
 
     accs.foreach((acc: Account) => assertNotNull(acc.username))
+    service.delete(account.personId, "somedomain")
   }
 }

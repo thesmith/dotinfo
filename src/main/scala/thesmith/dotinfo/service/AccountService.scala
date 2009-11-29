@@ -16,15 +16,14 @@ class AccountService {
   }
 
   /** Get all of a person's accounts */
-  def list(personId: String): Seq[Account] = Model.createQuery[Account]("from Account ac where ac.personId = :personId")
+  def list(personId: String): Seq[Account] = 
+    Model.createQuery[Account]("from Account ac where ac.personId = :personId")
     .setParameter("personId", personId).getResultList
 
   /** Get a person's account for a specific domain */
-  def find(personId: String, domain: String): Account = {
-    val account = Model.createQuery[Account]("from Account ac where ac.personId = :personId and ac.domain = :domain")
-      .setParameter("personId", personId)
-      .setParameter("domain", domain)
-      .findOne
-    account.get
-  }
+  def find(personId: String, domain: String): Account = 
+    Model.createQuery[Account]("from Account ac where ac.personId = :personId and ac.domain = :domain")
+    .setParameter("personId", personId)
+    .setParameter("domain", domain)
+    .getSingleResult
 }

@@ -17,10 +17,7 @@ class AccountTest {
 
   @After
   def tearDown(): Unit = {
-    Model.createQuery("delete from Account ac where ac.personId = :personId and ac.domain = :domain")
-      .setParameter("personId", account.personId)
-      .setParameter("domain", account.domain)
-      .executeUpdate()
+    Model.createQuery("delete from Account ac").executeUpdate()
   }
 
   @Test
@@ -42,7 +39,7 @@ class AccountTest {
     a.personId = "jlkldfs"
     a.domain = "fjkdls"
     a.username = "jfkdls"
-    Model.persist(a)
+    Model.persistAndFlush(a)
 
     val accs = Model.createQuery[Account]("from Account").getResultList
       
@@ -51,10 +48,5 @@ class AccountTest {
     assertEquals(2, accs.size)
 
     accs.foreach((acc: Account) => assertNotNull(acc.username))
-
-    Model.createQuery("delete from Account ac where ac.personId = :personId and ac.domain = :domain")
-      .setParameter("personId", a.personId)
-      .setParameter("domain", a.domain)
-      .executeUpdate()
   }
 }
