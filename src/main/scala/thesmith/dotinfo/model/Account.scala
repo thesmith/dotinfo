@@ -25,4 +25,7 @@ class Account {
 
   @Column{ val name="domain" }
   @BeanProperty var domain : String = _
+
+  @Column{ val name="template" }
+  @BeanProperty var template : String = _
 }

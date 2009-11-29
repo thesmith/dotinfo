@@ -28,6 +28,12 @@ class LastfmService extends InfoService {
     val guid = (item\"guid").text
     val pubDate = (item\"pubDate").text
     
-    return new Info(title, link, guid, domain, formater.parseDateTime(pubDate))
+    val info = new Info()
+    info.title = title
+    info.titleUrl = link
+    info.userUrl = guid
+    info.domain = domain
+    info.ago = formater.parseDateTime(pubDate).getMillis
+    info
   }
 }

@@ -15,4 +15,14 @@
     </table>
   </entity>
 
+  <entity class="Info" metadata-complete="false">
+    <table>
+      <unique-constraint>
+        <column-name>person_id</column-name>
+        <column-name>domain</column-name>
+        <column-name>ago</column-name>
+      </unique-constraint>
+    </table>
+  </entity>
+
 </entity-mappings>

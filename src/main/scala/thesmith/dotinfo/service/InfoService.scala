@@ -4,10 +4,41 @@ import java.net._
 import org.joda.time.{DateTime, Interval};
 import scala.xml._
 
-import thesmith.dotinfo.model.Info
+import thesmith.dotinfo.model._
 
 /** Trait defines interface to retireve status information from Info services */
 trait InfoService {
+  /** Persist an info */
+  def create(info: Info) = Model.persistAndFlush(info)
+
+  /** Remove an info */
+  def delete(personId: String, domain: String) = {
+    Model.createQuery("delete from Info i where i.personId = :personId and i.domain = :domain")
+      .setParameter("personId", personId)
+      .setParameter("domain", domain)
+      .executeUpdate()
+  }
+
+  /** Get all of a person's infos */
+  def list(personId: String): Seq[Info] = 
+    Model.createQuery[Info]("from Info i where i.personId = :personId")
+    .setParameter("personId", personId).getResultList
+
+  /** Get all of a person's infos */
+  def list(personId: String, domain: String): Seq[Info] = 
+    Model.createQuery[Info]("from Info i where i.personId = :personId and i.domain = :domain")
+    .setParameter("personId", personId)
+    .setParameter("domain", domain)
+    .getResultList
+
+  /** Get a person's info for a specific domain */
+  def find(personId: String, domain: String, ago: DateTime): Info = 
+    Model.createQuery[Info]("from Info i where i.personId = :personId and i.domain = :domain and i.ago = :ago")
+    .setParameter("personId", personId)
+    .setParameter("domain", domain)
+    .setParameter("ago", ago)
+    .getSingleResult
+
   /** Retrieve status information from Info service */
   def status(name: String): Info
   

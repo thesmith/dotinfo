@@ -28,6 +28,12 @@ class TwitterService extends InfoService {
     val title = (xml\"status"\"text").text
     val userUrl = "http://twitter.com/"+name
     
-    return new Info(title, titleUrl, userUrl, domain, formater.parseDateTime((xml\"status"\"created_at").text))
+    val info = new Info()
+    info.title = title
+    info.titleUrl = titleUrl
+    info.userUrl = userUrl
+    info.domain = domain
+    info.ago = formater.parseDateTime((xml\"status"\"created_at").text).getMillis
+    info
   }
 }
